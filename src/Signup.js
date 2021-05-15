@@ -8,7 +8,7 @@ function link() {
   var scopes = 'user-read-private user-read-email streaming user-library-read user-library-modify user-read-playback-state user-modify-playback-state'
 
   var redirect_uri = "";
-  if(window.hostname = "localhost") {
+  if(window.location.hostname === "localhost") {
     redirect_uri = local_redirect_uri;
   } else {
     redirect_uri = server_redirect_uri;
