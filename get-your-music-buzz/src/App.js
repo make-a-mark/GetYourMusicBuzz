@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import Signup from "./Signup"
+import Train from "./Train"
 import Player from "./Player"
 import Database from "./Database"
 
@@ -41,6 +42,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <Signup redirect="/" />
+          </Route>
+          <Route path="/train">
+            <Train redirect="/" />
           </Route>
           <Route path="/player">
             <Player redirect="/" />
