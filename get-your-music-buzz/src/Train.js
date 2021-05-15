@@ -1,6 +1,14 @@
 import React, {useState } from "react";
-import questions from "./Questions";
+import questions, {tracks} from "./Questions";
 import Player from "./Player"
+
+function getTrackFeatures(trackid, callback) {
+  fetch('https://api.spotify.com/v1/audio-features/' + tracks[trackid], {
+    headers: {"Authorization": "Bearer " + localStorage.getItem("token"),}
+  })
+  .then(response => response.json())
+  .then(data => callback(data));
+}
 
 function PageClickers(props) {
   if(props.currentPage === props.maxPage - 1) {
@@ -59,10 +67,16 @@ export default function Train() {
     setAns(clone)
   }
 
+  function handleTrackValues(data) {
+    console.log(data)
+  }
+
+  getTrackFeatures(0, handleTrackValues)
+
   if(questions[qindx].isNumInput) {
     return(
       <div>
-        <Player/>
+        <Player uris={tracks[0]}/>
         <div>{questions[qindx].Question}</div>
           {questions[qindx].Answers.map( (ans) => {
             return (
@@ -79,7 +93,7 @@ export default function Train() {
   } else {
     return(
       <div>
-        <Player/>
+        <Player uris={tracks[0]}/>
         <div>{questions[qindx].Question}</div>
           {questions[qindx].Answers.map( (ans, indx) => {
             return (

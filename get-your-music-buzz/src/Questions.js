@@ -55,4 +55,11 @@ const questions = [
   },
 ]
 
+const tracks = [
+  "0qcr5FMsEO85NAQjrlDRKo", //frozen
+  "7kh64k3P9Fk4EsA6vOdwmj", //princess frog
+  "1hwdPQtFHISvZ9SXMkNrIK", //aladdin
+]
+
+export {tracks}
 export default questions
