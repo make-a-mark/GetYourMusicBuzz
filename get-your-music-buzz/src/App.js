@@ -49,9 +49,6 @@ function App() {
           <Route path="/player">
             <Player redirect="/" />
           </Route>
-          <Route path="/database">
-            <Database redirect="/" />
-          </Route>
         </Switch>
     </Router>
   );
