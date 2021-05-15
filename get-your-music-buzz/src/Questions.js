@@ -59,6 +59,14 @@ const tracks = [
   "0qcr5FMsEO85NAQjrlDRKo", //frozen
   "7kh64k3P9Fk4EsA6vOdwmj", //princess frog
   "1hwdPQtFHISvZ9SXMkNrIK", //aladdin
+  "6mb6lVLNrcUgLnEN8QnDJd", //Moana
+  "3yQrGLCIYOcYopGthnfG3A", //Mulan
+  "1QArXU82lJg2gKQFRcOr0d", //Lion King
+  "1Oe6epuil8qP2yWsgejN3E", //Holy
+  "3OaunNUlXXs5e2PXtNAzzG", //UCLA
+  "70C4NyhjD5OZUMzvWZ3njJ", //Piano Man
+  "61HVbcNeRACZpyvHrc3AnD", //Frozen 2
+  "3aJgAgTI9srxcTuyzVDtkm", //Almost there
 ]
 
 export {tracks}

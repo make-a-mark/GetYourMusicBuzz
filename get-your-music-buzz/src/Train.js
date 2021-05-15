@@ -48,7 +48,7 @@ function PageClickers(props) {
   }
 }
 
-function SingleAdd( colors, 
+function FeatureAdd( colors, 
                     happiness, 
                     dinner, 
                     animal, 
@@ -56,9 +56,9 @@ function SingleAdd( colors,
                     sleep, 
                     fun_scale, 
                     productiveness,
-                    in_public) {
-  console.log(colors[0]);
-  db.collection("training_data").add({
+                    in_public,
+                    id) {
+  db.collection("training_data").doc(id).set({
       red: colors[0],
       orange: colors[1],
       yellow: colors[2],
@@ -97,6 +97,41 @@ function SingleAdd( colors,
   });
 }
 
+function LabelAdd(  id,
+                    acousticness_value, 
+                    danceability_value, 
+                    energy_value, 
+                    instrumentalness_value, 
+                    key_value,
+                    liveness_value, 
+                    loudness_value,
+                    mode_value, 
+                    speechiness_value, 
+                    tempo_value,
+                    time_signature_value,
+                    valence_value) {
+  db.collection("label_data").doc(id).set({
+      acousticness: acousticness_value,
+      danceability: danceability_value,
+      energy: energy_value,
+      instrumentalness: instrumentalness_value,
+      key_value: key_value,
+      liveness_value: liveness_value,
+      loudness_value: loudness_value,
+      mode_value: mode_value,
+      speechiness_value: speechiness_value,
+      tempo_value: tempo_value,
+      time_signature_value: time_signature_value,
+      valence: valence_value
+  })
+  .then((docRef) => {
+      console.log("Document written with ID: ", docRef.id);
+  })
+  .catch((error) => {
+      console.error("Error adding document: ", error);
+  });
+}
+
 
 export default function Train() {
   const [qindx, setQIndx] = useState(0)
@@ -107,15 +142,16 @@ export default function Train() {
     if(d == 2) {
       console.log(ans)
       console.log(ans[0].Results)
-      SingleAdd(ans[0].Results,
-                ans[1].Results,
-                ans[2].Results,
-                ans[3].Results,
-                ans[4].Results,
-                ans[5].Results,
-                ans[6].Results,
-                ans[7].Results,
-                ans[8].Results,)
+      FeatureAdd( ans[0].Results,
+                  ans[1].Results,
+                  ans[2].Results,
+                  ans[3].Results,
+                  ans[4].Results,
+                  ans[5].Results,
+                  ans[6].Results,
+                  ans[7].Results,
+                  ans[8].Results,
+                  "Test")
     }
 
     if(d == 1 && qindx > 0) {
@@ -148,15 +184,30 @@ export default function Train() {
   }
 
   function handleTrackValues(data) {
-    console.log(data)
+    // console.log(data);
+    LabelAdd( data.id,
+              data.acousticness, 
+              data.danceability, 
+              data.energy, 
+              data.instrumentalness, 
+              data.key,
+              data.liveness, 
+              data.loudness,
+              data.mode, 
+              data.speechiness, 
+              data.tempo,
+              data.time_signature,
+              data.valence)
   }
 
-  getTrackFeatures(0, handleTrackValues)
+  var randomTrack = Math.floor(Math.random() * tracks.length)
+
+  getTrackFeatures(randomTrack, handleTrackValues)
 
   if(questions[qindx].isNumInput) {
     return(
       <div>
-        <Player uris={tracks[0]}/>
+        <Player uris={tracks[randomTrack]}/>
         <div>{questions[qindx].Question}</div>
           {questions[qindx].Answers.map( (ans) => {
             return (
@@ -173,7 +224,7 @@ export default function Train() {
   } else {
     return(
       <div>
-        <Player uris={tracks[0]}/>
+        <Player uris={tracks[randomTrack]}/>
         <div>{questions[qindx].Question}</div>
           {questions[qindx].Answers.map( (ans, indx) => {
             return (
