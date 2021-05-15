@@ -14,7 +14,7 @@ const questions = [
   {
     Question: "What would you like to have for dinner?",
     isNumInput: false,
-    Answers: ["Meat", "Fish", "Veggies", "Nothing"],
+    Answers: ["Meat", "Seafood", "Veggies", "Nothing"],
     Results: [0, 0, 0, 0],
   },
   {
