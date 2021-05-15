@@ -34,14 +34,14 @@ function PageClickers(props) {
   if(props.currentPage === props.maxPage - 1) {
     return (
       <div>
-        <button onClick={() => props.setPage(1)}> left </button>
+        {/*<button onClick={() => props.setPage(1)}> left </button>*/}
         <button onClick={() => props.setPage(2)}> Submit </button>
       </div>
     )
   } else {
     return (
       <div>
-        <button onClick={() => props.setPage(1)}> left </button>
+        {/*<button onClick={() => props.setPage(1)}> left </button>*/}
         <button onClick={() => props.setPage(0)}> right </button>
       </div>
     )
@@ -136,6 +136,8 @@ function LabelAdd(  id,
 export default function Train() {
   const [qindx, setQIndx] = useState(0)
   const [ans, setAns] = useState(questions) //stores copy of questions but answers fill up in here
+  const [qFeaturesSent, setqFeaturesSent] = useState(false) //Has song data been sent to database yet?
+  const [randomTrack, setRandomTrack] = useState(Math.floor(Math.random() * tracks.length)) //random track setRandomTrack should not be called
 
   // dec page if d = 1 and inc page if d = 0 and d=2 console.logs the answers
   const setPage = (d) => {
@@ -152,6 +154,7 @@ export default function Train() {
                   ans[7].Results,
                   ans[8].Results,
                   "Test")
+      window.location = '/'
     }
 
     if(d == 1 && qindx > 0) {
@@ -184,7 +187,10 @@ export default function Train() {
   }
 
   function handleTrackValues(data) {
-    // console.log(data);
+    if(qFeaturesSent) {
+      return;
+    }
+
     LabelAdd( data.id,
               data.acousticness, 
               data.danceability, 
@@ -198,9 +204,9 @@ export default function Train() {
               data.tempo,
               data.time_signature,
               data.valence)
+    setqFeaturesSent(true)
   }
 
-  var randomTrack = Math.floor(Math.random() * tracks.length)
 
   getTrackFeatures(randomTrack, handleTrackValues)
 
@@ -211,7 +217,7 @@ export default function Train() {
         <div>{questions[qindx].Question}</div>
           {questions[qindx].Answers.map( (ans) => {
             return (
-            <div key={ans}> 
+            <div key={ans + qindx}> 
               <input type="number" onChange={checkNum}></input> 
               <br/>
             </div>)
@@ -228,7 +234,7 @@ export default function Train() {
         <div>{questions[qindx].Question}</div>
           {questions[qindx].Answers.map( (ans, indx) => {
             return (
-            <div key={ans}> 
+            <div key={ans + qindx}> 
               <input onChange={(e) => checkClick(e, indx)} type="checkbox"></input> 
               {ans}
               <br/>

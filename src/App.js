@@ -14,18 +14,16 @@ import Player from "./Player"
 import firebase from "firebase/app";
 import "firebase/firestore";
 
-function Site() {
+function WelcomeSite() {
   return (
     <div>
-      I am the site
-    </div>
-  )
-}
-
-function Test() {
-  return (
-    <div>
-      Testing
+      <h1>
+        I am GetYourMusicBuzz!
+      </h1>
+      <div>
+        <button onClick={() => window.location = "/signup"}> Sign In </button>
+        <button onClick={() => window.location = "/train"}> Train </button>
+      </div>
     </div>
   )
 }
@@ -37,7 +35,7 @@ function App() {
           renders the first one that matches the current URL. */}
         <Switch>
           <Route exact path="/">
-            <Site />
+            <WelcomeSite />
           </Route>
           <Route path="/signup">
             <Signup redirect="/" />
