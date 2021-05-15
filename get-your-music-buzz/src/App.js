@@ -9,6 +9,7 @@ import {
 
 import Signup from "./Signup"
 import Train from "./Train"
+import Player from "./Player"
 
 function Site() {
   return (
@@ -40,6 +41,9 @@ function App() {
           </Route>
           <Route path="/train">
             <Train redirect="/" />
+          </Route>
+          <Route path="/player">
+            <Player redirect="/" />
           </Route>
         </Switch>
     </Router>
