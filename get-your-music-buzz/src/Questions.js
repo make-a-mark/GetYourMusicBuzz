@@ -2,7 +2,7 @@ const questions = [
   {
     Question: "What is your Favorite Color?",
     isNumInput: false,
-    Answers: ["Red", "Yellow", "Green", "Blue", "Indigo", "Violet"],
+    Answers: ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"],
     Results: [0, 0, 0, 0, 0, 0]
   },
   {
