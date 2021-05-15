@@ -53,6 +53,18 @@ const questions = [
     Answers: ["Yes", "No"],
     Results: [0, 0],
   },
+  {
+    Question: "What Myers-Briggs Type Indicator would best describe you? (https://www.16personalities.com/personality-types)",
+    isNumInput: false,
+    Answers: ["Analysts", "Diplomats", "Sentinels", "Explorers"],
+    Results: [0, 0, 0, 0],
+  },
+  {
+    Question: "What is your Astrology sign? (http://nuclear.ucdavis.edu/~rpicha/personal/astrology/)",
+    isNumInput: false,
+    Answers: ["Aries", "Taurus", "Gemini", "Leo", "Cancer", "Libra", "Virgo", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
+    Results: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  },
 ]
 
 const tracks = [
@@ -67,6 +79,23 @@ const tracks = [
   "70C4NyhjD5OZUMzvWZ3njJ", //Piano Man
   "61HVbcNeRACZpyvHrc3AnD", //Frozen 2
   "3aJgAgTI9srxcTuyzVDtkm", //Almost there
+  "39uLYYZytVUwcjgeYLI409", //Howl's Moving Castle
+  "463CkQjx2Zk1yXoBuierM9", //Levitating - dua lipa
+  "463CkQjx2Zk1yXoBuierM9", //Heartbreak anniversary
+  "1sbEeUY8KsdvgiQi26JBFz", //Popstar - DJ Khaled & Drake
+  "6AGOKlMZWLCaEJGnaROtF9", //Put Your Records On
+  "7MAibcTli4IisCtbHKrGMh", //Leave The Door Open
+  "3YJJjQPAbDT7mGpX3WtQ9A", //Good Days - SZA
+  "7JrSIPcfkWhDzxWII8Jz7V", //Escaping Time - from Deep Focus playlist
+  "0CNuKKi6MHrr8DqYtpzbCD", //bossa uh (bosa nova song)
+  "4SFBV7SRNG2e2kyL1F6kjU", //Bach - The Well-Tempeered Clavier
+  "2cFK03sObtI6AK3QKeOT5g", //We got that cool (house)
+  "2WfaOiMkCvy7F5fcp2zZ8L", //Take on Me
+  "47BBI51FKFwOMlIiX6m8ya", //I want it that way
+  "2CgOd0Lj5MuvOqzqdaAXtS", //Shelter
+  "08mG3Y1vljYA6bvDt4Wqkj", //Back in black
+  "6dGnYIeXmHdcikdzNNDMm2", //Here comes the sun
+  "7Jh1bpe76CNTCgdgAdBw4Z", //David Bowie Heroes
 ]
 
 export {tracks}

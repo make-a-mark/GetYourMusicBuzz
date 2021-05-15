@@ -57,8 +57,9 @@ function FeatureAdd( colors,
                     fun_scale, 
                     productiveness,
                     in_public,
-                    track,
-                    id) {
+                    myers_briggs,
+                    zodiac_sign,
+                    track) {
   var d = new Date();
   db.collection("training_data").doc(d.toString().replace(/\s/g, '_')).set({
       red: colors[0],
@@ -90,6 +91,22 @@ function FeatureAdd( colors,
       fun: fun_scale[0],
       productive: productiveness[0],
       public: in_public[0],
+      analyst: myers_briggs[0],
+      diplomat: myers_briggs[1],
+      explorer: myers_briggs[2],
+      sentinel: myers_briggs[3],
+      aries: zodiac_sign[0],
+      taurus: zodiac_sign[1],
+      gemini: zodiac_sign[2],
+      leo: zodiac_sign[3],
+      cancer: zodiac_sign[4],
+      libra: zodiac_sign[5],
+      virgo: zodiac_sign[6],
+      scorpio: zodiac_sign[7],
+      sagittarius: zodiac_sign[8],
+      capricorn: zodiac_sign[9],
+      aquarius: zodiac_sign[10],
+      pisces: zodiac_sign[11],
       label: track,
   })
   .then((docRef) => {
@@ -146,7 +163,6 @@ export default function Train() {
   const setPage = (d) => {
     if(d == 2) {
       console.log(ans)
-      console.log(ans[0].Results)
       FeatureAdd( ans[0].Results,
                   ans[1].Results,
                   ans[2].Results,
@@ -156,8 +172,9 @@ export default function Train() {
                   ans[6].Results,
                   ans[7].Results,
                   ans[8].Results,
-                  tracks[randomTrack],
-                  "Test")
+                  ans[9].Results,
+                  ans[10].Results,
+                  tracks[randomTrack])
       window.location = '/'
     }
 
