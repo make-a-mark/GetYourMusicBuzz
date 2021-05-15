@@ -57,8 +57,10 @@ function FeatureAdd( colors,
                     fun_scale, 
                     productiveness,
                     in_public,
+                    track,
                     id) {
-  db.collection("training_data").doc(id).set({
+  var d = new Date();
+  db.collection("training_data").doc(d.toString().replace(/\s/g, '_')).set({
       red: colors[0],
       orange: colors[1],
       yellow: colors[2],
@@ -87,7 +89,8 @@ function FeatureAdd( colors,
       sleep: sleep[0],
       fun: fun_scale[0],
       productive: productiveness[0],
-      public: in_public[0]
+      public: in_public[0],
+      label: track,
   })
   .then((docRef) => {
       console.log("Document written with ID: ", docRef.id);
@@ -153,6 +156,7 @@ export default function Train() {
                   ans[6].Results,
                   ans[7].Results,
                   ans[8].Results,
+                  tracks[randomTrack],
                   "Test")
       window.location = '/'
     }
