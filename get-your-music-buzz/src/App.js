@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import Signup from "./Signup"
+import Player from "./Player"
 
 function Site() {
   return (
@@ -36,6 +37,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <Signup redirect="/" />
+          </Route>
+          <Route path="/player">
+            <Player redirect="/" />
           </Route>
         </Switch>
     </Router>
