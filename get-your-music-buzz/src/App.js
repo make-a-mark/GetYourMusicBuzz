@@ -9,6 +9,10 @@ import {
 
 import Signup from "./Signup"
 import Player from "./Player"
+import Database from "./Database"
+
+import firebase from "firebase/app";
+import "firebase/firestore";
 
 function Site() {
   return (
@@ -41,9 +45,13 @@ function App() {
           <Route path="/player">
             <Player redirect="/" />
           </Route>
+          <Route path="/database">
+            <Database redirect="/" />
+          </Route>
         </Switch>
     </Router>
   );
 }
+
 
 export default App;
