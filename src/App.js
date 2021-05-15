@@ -37,6 +37,9 @@ function App() {
           <Route exact path="/">
             <WelcomeSite />
           </Route>
+          <Route exact path="/index.html">
+            <WelcomeSite />
+          </Route>
           <Route path="/signup">
             <Signup redirect="/" />
           </Route>
