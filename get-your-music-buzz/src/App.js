@@ -10,7 +10,6 @@ import {
 import Signup from "./Signup"
 import Train from "./Train"
 import Player from "./Player"
-import Database from "./Database"
 
 import firebase from "firebase/app";
 import "firebase/firestore";
