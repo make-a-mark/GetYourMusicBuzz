@@ -4,6 +4,7 @@ import Player from "./Player"
 // import { app } from './App.js';
 import firebase from "firebase/app";
 import 'firebase/firestore';
+import { data } from "jquery";
 
 // create a web app in fireabse 
 // then get your app config object from firebase console -> settings
@@ -60,7 +61,8 @@ function FeatureAdd( colors,
                     like_rollercoasters,
                     myers_briggs,
                     zodiac_sign,
-                    track) {
+                    track,
+                    data) {
   var d = new Date();
   db.collection("training_data").doc(d.toString().replace(/\s/g, '_')).set({
       red: colors[0],
@@ -108,10 +110,24 @@ function FeatureAdd( colors,
       capricorn: zodiac_sign[9],
       aquarius: zodiac_sign[10],
       pisces: zodiac_sign[11],
-      label: track,
+      label_track: track,
+      label_acousticness: data.acousticness ,
+      label_danceability: data.danceability ,
+      label_energy: data.energy,
+      label_instrumentalness: data.instrumentalness,
+      label_key: data.key,
+      label_liveness: data.liveness,
+      label_loudness: data.loudness,
+      label_mode: data.mode,
+      label_speechiness: data.speechiness,
+      label_tempo: data.tempo,
+      label_time_signature: data.time_signature,
+      label_valence: data.valence
+       
   })
   .then(() => {
     console.log("Document successfully created!");
+    window.location = "/"
   })
 }
 
@@ -151,27 +167,15 @@ function LabelAdd(  id,
 export default function Train() {
   const [qindx, setQIndx] = useState(0)
   const [ans, setAns] = useState(questions) //stores copy of questions but answers fill up in here
-  const [qFeaturesSent, setqFeaturesSent] = useState(false) //Has song data been sent to database yet?
+  const [qFeatures, setQFeatures] = useState(null) //Has song data been sent to database yet?
   const [randomTrack, setRandomTrack] = useState(Math.floor(Math.random() * tracks.length)) //random track setRandomTrack should not be called
 
   // dec page if d = 1 and inc page if d = 0 and d=2 console.logs the answers
   const setPage = (d) => {
     if(d == 2) {
-      console.log(ans)
-      FeatureAdd( ans[0].Results,
-                  ans[1].Results,
-                  ans[2].Results,
-                  ans[3].Results,
-                  ans[4].Results,
-                  ans[5].Results,
-                  ans[6].Results,
-                  ans[7].Results,
-                  ans[8].Results,
-                  ans[9].Results,
-                  ans[10].Results,
-                  tracks[randomTrack]);
+      getTrackFeatures(randomTrack, handleTrackValues)
 
-      window.location = '/';
+      //window.location = '/';
 
     }
 
@@ -205,10 +209,7 @@ export default function Train() {
   }
 
   function handleTrackValues(data) {
-    if(qFeaturesSent) {
-      return;
-    }
-
+    /*
     LabelAdd( data.id,
               data.acousticness, 
               data.danceability, 
@@ -222,11 +223,28 @@ export default function Train() {
               data.tempo,
               data.time_signature,
               data.valence)
-    setqFeaturesSent(true)
+    */
+    
+    setQFeatures(data)
+
+    FeatureAdd( ans[0].Results,
+                ans[1].Results,
+                ans[2].Results,
+                ans[3].Results,
+                ans[4].Results,
+                ans[5].Results,
+                ans[6].Results,
+                ans[7].Results,
+                ans[8].Results,
+                ans[9].Results,
+                ans[10].Results,
+                tracks[randomTrack],
+                data);
+
+    console.log(qFeatures)
   }
 
 
-  getTrackFeatures(randomTrack, handleTrackValues)
 
   if(questions[qindx].isNumInput) {
     return(
