@@ -174,8 +174,8 @@ export default function Train() {
                   ans[8].Results,
                   ans[9].Results,
                   ans[10].Results,
-                  tracks[randomTrack])
-      window.location = '/'
+                  tracks[randomTrack]);
+      window.location = '/';
     }
 
     if(d == 1 && qindx > 0) {
