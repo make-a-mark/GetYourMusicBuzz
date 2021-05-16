@@ -1,6 +1,6 @@
 const questions = [
   {
-    Question: "What color best describes this song?",
+    Question: "What color(s) best describes this song?",
     isNumInput: false,
     Answers: ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"],
     Results: [0, 0, 0, 0, 0, 0, 0]
@@ -12,19 +12,19 @@ const questions = [
     Results: [0],
   },
   {
-    Question: "What would a person listening to this song like to have for dinner?",
+    Question: "What food(s) would a person listening to this song like to have for dinner?",
     isNumInput: false,
     Answers: ["Meat", "Seafood", "Veggies", "Nothing"],
     Results: [0, 0, 0, 0],
   },
   {
-    Question: "What animal best describes the mood of the song?",
+    Question: "What animal(s) best describes the mood of the song?",
     isNumInput: false,
     Answers: ["Elephant", "Fish", "Turtle", "Fox", "Cow", "Dog", "Cat"],
     Results: [0, 0, 0, 0, 0, 0, 0],
   },
   {
-    Question: "What disney movie best describes this song?",
+    Question: "What disney movie(s) best describes this song?",
     isNumInput: false,
     Answers: ["Star Wars", "Frozen", "Moana", "Hercules", "Raya", "Aladdin"],
     Results: [0, 0, 0, 0, 0, 0],
@@ -54,13 +54,13 @@ const questions = [
     Results: [0, 0],
   },
   {
-    Question: "What Myers-Briggs Type Indicator would be most likely to listen to this song? (https://www.16personalities.com/personality-types)",
+    Question: "What Myers-Briggs Type Indicator(s) would be most likely to listen to this song? (https://www.16personalities.com/personality-types)",
     isNumInput: false,
     Answers: ["Analysts", "Diplomats", "Sentinels", "Explorers"],
     Results: [0, 0, 0, 0],
   },
   {
-    Question: "What Astrology/zodiac sign would be most likely to listen to this song? (http://nuclear.ucdavis.edu/~rpicha/personal/astrology/)",
+    Question: "What Astrology/zodiac sign(s) would be most likely to listen to this song? (http://nuclear.ucdavis.edu/~rpicha/personal/astrology/)",
     isNumInput: false,
     Answers: ["Aries", "Taurus", "Gemini", "Leo", "Cancer", "Libra", "Virgo", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
     Results: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
