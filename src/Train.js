@@ -30,6 +30,7 @@ function getTrackFeatures(trackid, callback) {
   .then(data => callback(data));
 }
 
+
 function PageClickers(props) {
   if(props.currentPage === props.maxPage - 1) {
     return (
@@ -109,12 +110,9 @@ function FeatureAdd( colors,
       pisces: zodiac_sign[11],
       label: track,
   })
-  .then((docRef) => {
-      console.log("Document written with ID: ", docRef.id);
+  .then(() => {
+    console.log("Document successfully created!");
   })
-  .catch((error) => {
-      console.error("Error adding document: ", error);
-  });
 }
 
 function LabelAdd(  id,
@@ -144,12 +142,9 @@ function LabelAdd(  id,
       time_signature_value: time_signature_value,
       valence: valence_value
   })
-  .then((docRef) => {
-      console.log("Document written with ID: ", docRef.id);
+  .then(() => {
+    console.log("Document successfully created!");
   })
-  .catch((error) => {
-      console.error("Error adding document: ", error);
-  });
 }
 
 
@@ -175,7 +170,9 @@ export default function Train() {
                   ans[9].Results,
                   ans[10].Results,
                   tracks[randomTrack]);
+
       window.location = '/';
+
     }
 
     if(d == 1 && qindx > 0) {
