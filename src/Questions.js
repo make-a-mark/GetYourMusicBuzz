@@ -6,7 +6,7 @@ const questions = [
     Results: [0, 0, 0, 0, 0, 0, 0]
   },
   {
-    Question: "Happiness of this song on a scale from 0-1 (as in 0.5, 0.4, etc)",
+    Question: "Happiness of this song on a scale from 0-10?",
     isNumInput: true,
     Answers: ["Quality"],
     Results: [0],
@@ -30,7 +30,7 @@ const questions = [
     Results: [0, 0, 0, 0, 0, 0],
   },
   {
-    Question: "What would the quality of sleep be for a person listening to this song (0-1)?",
+    Question: "What would the quality of sleep be for a person listening to this song on a scale from 0-10?",
     isNumInput: true,
     Answers: ["Sleep"],
     Results: [0],
