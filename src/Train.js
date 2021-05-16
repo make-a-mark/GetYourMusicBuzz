@@ -2,7 +2,7 @@ import React, {useState } from "react";
 import questions, {tracks} from "./Questions";
 import Player from "./Player"
 // import { app } from './App.js';
-import firebase from "firebase";
+import firebase from "firebase/app";
 import 'firebase/firestore';
 
 // create a web app in fireabse 
