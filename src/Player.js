@@ -4,7 +4,7 @@ export default function Player(props) {
   // console.log(props.uris)
   return (
     <div style={{width: '900px'}}>
-      I am Player
+      Player
       <SpotifyPlayer
         token={localStorage.getItem("token")}
         uris={['spotify:track:'+props.uris]}

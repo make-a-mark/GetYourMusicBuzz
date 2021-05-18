@@ -12,6 +12,7 @@ import {send_data} from "./Train";
 import Signup from "./Signup"
 import Train from "./Train"
 import Player from "./Player"
+import Gymf from "./gymf"
 
 
 function WelcomeSite() {
@@ -22,6 +23,7 @@ function WelcomeSite() {
       </h1>
       <div>
         <button onClick={() => window.location = "/train"}> Train </button>
+        <button onClick={() => window.location = "/gymf"}> GYMF </button>
         <button onClick={send_data}> SendData </button>
       </div>
     </div>
@@ -41,6 +43,9 @@ function App() {
             </Route>
             <Route exact path="/index.html">
               <WelcomeSite />
+            </Route>
+            <Route path="/gymf">
+              <Gymf />
             </Route>
             <Route path="/signup">
               <Signup redirect="/" />
