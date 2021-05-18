@@ -41,13 +41,16 @@ export async function send_data()
   // console.log(train_data[0])
 
   // train_data[i]
+  /*
   console.log(train_data[0]);
   axios.post('http://70.95.147.51:5000/predict', train_data[0])
     .then(response => console.log(response));
-  // for(var i = 0; i < train_data.length; i++)
-  // {
-  //   axios.post('http://70.95.147.51:5000/receive', train_data[i]);
-  // }
+    */
+  for(var i = 0; i < train_data.length; i++)
+  {
+    var link = "https://gymf.herokuapp.com/receive"
+    axios.post(link, train_data[i]);
+  }
   /*
       // Simple POST request with a JSON body using axios
       const article = { title: 'Training Data' };
