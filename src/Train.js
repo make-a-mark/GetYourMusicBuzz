@@ -5,6 +5,7 @@ import Player from "./Player"
 import firebase from "firebase/app";
 import 'firebase/firestore';
 import { data } from "jquery";
+import axios from "axios";
 
 // create a web app in fireabse 
 // then get your app config object from firebase console -> settings
@@ -30,6 +31,34 @@ function getTrackFeatures(trackid, callback) {
   .then(response => response.json())
   .then(data => callback(data));
 }
+
+export async function send_data() 
+{
+  const snapshot = await firebase.firestore().collection('training_data').get()
+  var train_data = snapshot.docs.map(doc => doc.data());
+  console.log(train_data);
+  console.log(train_data.length);
+  // console.log(train_data[0])
+
+  // train_data[i]
+  console.log(train_data[0]);
+  axios.post('http://70.95.147.51:5000/predict', train_data[0])
+    .then(response => console.log(response));
+  // for(var i = 0; i < train_data.length; i++)
+  // {
+  //   axios.post('http://70.95.147.51:5000/receive', train_data[i]);
+  // }
+  /*
+      // Simple POST request with a JSON body using axios
+      const article = { title: 'Training Data' };
+      axios.post('/receive', article)
+          .then(response => this.setState({ articleId: response.data.id }));
+  */
+}
+
+
+
+
 
 
 function PageClickers(props) {

@@ -7,9 +7,12 @@ import {
   Link
 } from "react-router-dom";
 
+import {send_data} from "./Train";
+
 import Signup from "./Signup"
 import Train from "./Train"
 import Player from "./Player"
+
 
 function WelcomeSite() {
   return (
@@ -19,6 +22,7 @@ function WelcomeSite() {
       </h1>
       <div>
         <button onClick={() => window.location = "/train"}> Train </button>
+        <button onClick={send_data}> SendData </button>
       </div>
     </div>
   )
