@@ -82,6 +82,7 @@ var toSend = {
   capricorn: zodiac_sign[9],
   aquarius: zodiac_sign[10],
   pisces: zodiac_sign[11],
+  username: localStorage.getItem("username"),
   }
 
   axios.post('https://gymf.herokuapp.com/predict', toSend)
