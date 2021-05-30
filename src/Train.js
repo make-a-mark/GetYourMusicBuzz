@@ -65,10 +65,13 @@ export async function send_data()
 
 
 function PageClickers(props) {
+
+  const [username, setUsername] = useState("")
   if(props.currentPage === props.maxPage - 1) {
     return (
       <div>
         {/*<button onClick={() => props.setPage(1)}> left </button>*/}
+        {/* <input type="text" onChange={(e)=>{setUsername(e.target.value)}}></input>  */}
         <button onClick={() => props.setPage(2)}> Submit </button>
       </div>
     )
@@ -94,7 +97,8 @@ function FeatureAdd( colors,
                     myers_briggs,
                     zodiac_sign,
                     track,
-                    data) {
+                    data,
+                    ) {
   var d = new Date();
   db.collection("training_data").doc(d.toString().replace(/\s/g, '_')).set({
       red: colors[0],
@@ -154,7 +158,8 @@ function FeatureAdd( colors,
       label_speechiness: data.speechiness,
       label_tempo: data.tempo,
       label_time_signature: data.time_signature,
-      label_valence: data.valence
+      label_valence: data.valence,
+      username: localStorage.getItem("username")
        
   })
   .then(() => {
@@ -271,7 +276,8 @@ export default function Train() {
                 ans[9].Results,
                 ans[10].Results,
                 tracks[randomTrack],
-                data);
+                data
+                );
 
     console.log(qFeatures)
   }

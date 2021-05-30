@@ -1,4 +1,5 @@
 import logo from "./logo.svg";
+import React, {useState } from "react";
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -16,15 +17,22 @@ import Gymf from "./gymf"
 
 
 function WelcomeSite() {
+
+  const [username, setUsername] = useState("")
   return (
     <div>
       <h1>
         I am GetYourMusicBuzz!
       </h1>
       <div>
+        Username
+        <input type="text" onChange={(e) => {setUsername(e.target.value)}}></input>
+      </div>
+      <div>
         <button onClick={() => window.location = "/train"}> Train </button>
         <button onClick={() => window.location = "/gymf"}> GYMF </button>
         <button onClick={send_data}> SendData </button>
+        <button onClick={() => {localStorage.setItem("username", username)}}> UserName </button>
       </div>
     </div>
   )
