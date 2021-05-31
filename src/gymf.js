@@ -1,6 +1,7 @@
 import React, {useState } from "react";
 import questions, {tracks, genres} from "./Questions";
 import Player from "./Player"
+import {Player1} from "./Player"
 import axios from "axios"
 
 function PageClickers(props) {
@@ -86,7 +87,12 @@ var toSend = {
   }
 
   axios.post('https://gymf.herokuapp.com/predict', toSend)
-    .then(response => spotifySearch(response.data));
+    .then(response => {
+      spotifySearch(response.data, 0)
+      spotifySearch(response.data, 1)
+      spotifySearch(response.data, 2)
+      spotifySearch(response.data, 3)
+    });
 
 }
 
@@ -94,10 +100,13 @@ export default function Gymf() {
   const [qindx, setQIndx] = useState(0)
   const [ans, setAns] = useState(questions) //stores copy of questions but answers fill up in here
   const [prediction, setPrediction] = useState("")
+  const [prediction1, setPrediction1] = useState("")
+  const [prediction2, setPrediction2] = useState("")
+  const [prediction3, setPrediction3] = useState("")
   
 
   //limit=10&market=ES&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry
-  function spotifySearch(prediction) {
+  function spotifySearch(prediction, predictionno) {
     
     var genres_string = ""
     for (var i = 0; i < 5; i++) {
@@ -133,7 +142,14 @@ export default function Gymf() {
     .then(response => response.json())
     .then(data => {
       var uri = (data["tracks"][0]["uri"]).split(':')[2]
-      setPrediction(uri)
+      if(predictionno === 0)
+        setPrediction(uri)
+      else if(predictionno === 1)
+        setPrediction1(uri)
+      else if(predictionno === 2)
+        setPrediction2(uri)
+      else if(predictionno === 3)
+        setPrediction3(uri)
     })
 
   }
@@ -186,11 +202,14 @@ export default function Gymf() {
     setAns(clone)
   }
 
-  if(prediction) {
+  if(prediction && prediction1 && prediction2 && prediction3) {
     return(
       <div>
         Your prediction:
-        <Player uris={prediction} />
+        <Player1 id='a' uris={[prediction, prediction1, prediction2, prediction3]} /> 
+
+        {/* <Player1 id='b' uris={prediction} /> */}
+
         <button onClick={() => window.location = '/'}>Home</button>
       </div>
     )
