@@ -1,6 +1,8 @@
 import logo from "./logo.svg";
 import React, {useState } from "react";
 import "./App.css";
+import "./CurrentUser"
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,25 +16,20 @@ import Signup from "./Signup"
 import Train from "./Train"
 import Player from "./Player"
 import Gymf from "./gymf"
+import CurrentUser from "./CurrentUser";
 
 
 function WelcomeSite() {
 
-  const [username, setUsername] = useState("")
   return (
     <div>
       <h1>
         I am GetYourMusicBuzz!
       </h1>
       <div>
-        Username
-        <input type="text" onChange={(e) => {setUsername(e.target.value)}}></input>
-      </div>
-      <div>
         <button onClick={() => window.location = "/train"}> Train </button>
         <button onClick={() => window.location = "/gymf"}> GYMF </button>
         <button onClick={send_data}> SendData </button>
-        <button onClick={() => {localStorage.setItem("username", username)}}> UserName </button>
       </div>
     </div>
   )
@@ -42,6 +39,7 @@ function App() {
   return (
     <div>
       <Signup />
+      <CurrentUser />
       <Router>
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}

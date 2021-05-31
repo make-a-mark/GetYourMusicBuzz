@@ -51,7 +51,7 @@ export default function signup(props) {
   } else {
     return (
       <div>
-        <button onClick={redirect}> Sign In</button>
+        <button onClick={redirect}> Connect to Spotify</button>
       </div>
     )
   }
