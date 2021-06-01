@@ -1,5 +1,5 @@
 import React, {useState } from "react";
-import questions, {tracks} from "./Questions";
+import training_questions, {tracks} from "./Questions";
 import Player from "./Player"
 // import { app } from './App.js';
 import firebase from "firebase/app";
@@ -85,7 +85,7 @@ function PageClickers(props) {
   }
 }
 
-function FeatureAdd( colors, 
+export function FeatureAdd( colors, 
                     happiness, 
                     dinner, 
                     animal, 
@@ -164,7 +164,7 @@ function FeatureAdd( colors,
   })
   .then(() => {
     console.log("Document successfully created!");
-    window.location = "/"
+    // window.location = "/"
   })
 }
 
@@ -203,7 +203,7 @@ function LabelAdd(  id,
 
 export default function Train() {
   const [qindx, setQIndx] = useState(0)
-  const [ans, setAns] = useState(questions) //stores copy of questions but answers fill up in here
+  const [ans, setAns] = useState(training_questions) //stores copy of questions but answers fill up in here
   const [qFeatures, setQFeatures] = useState(null) //Has song data been sent to database yet?
   const [randomTrack, setRandomTrack] = useState(Math.floor(Math.random() * tracks.length)) //random track setRandomTrack should not be called
 
@@ -220,7 +220,7 @@ export default function Train() {
       setQIndx(qindx - 1)
     } else if (d == 1 && qindx == 0) {
       return
-    } else if(qindx < questions.length - 1) {
+    } else if(qindx < training_questions.length - 1) {
       setQIndx(qindx + 1)
     }
   }
@@ -284,12 +284,12 @@ export default function Train() {
 
 
 
-  if(questions[qindx].isNumInput) {
+  if(training_questions[qindx].isNumInput) {
     return(
       <div>
         <Player uris={tracks[randomTrack]}/>
-        <div>{questions[qindx].Question}</div>
-          {questions[qindx].Answers.map( (ans) => {
+        <div>{training_questions[qindx].Question}</div>
+          {training_questions[qindx].Answers.map( (ans) => {
             return (
             <div key={ans + qindx}> 
               <input type="number" onChange={checkNum}></input> 
@@ -305,8 +305,8 @@ export default function Train() {
     return(
       <div>
         <Player uris={tracks[randomTrack]}/>
-        <div>{questions[qindx].Question}</div>
-          {questions[qindx].Answers.map( (ans, indx) => {
+        <div>{training_questions[qindx].Question}</div>
+          {training_questions[qindx].Answers.map( (ans, indx) => {
             return (
             <div key={ans + qindx}> 
               <input onChange={(e) => checkClick(e, indx)} type="checkbox"></input> 

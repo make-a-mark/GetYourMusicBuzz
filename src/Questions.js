@@ -1,4 +1,4 @@
-const questions = [
+const training_questions = [
   {
     Question: "What color(s) best describes this song?",
     isNumInput: false,
@@ -231,4 +231,5 @@ const genres = {
 }
 
 export {tracks, genres}
-export default questions
+export default training_questions
+
