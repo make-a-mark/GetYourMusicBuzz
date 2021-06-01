@@ -3,67 +3,67 @@ const training_questions = [
     Question: "What color(s) best describes this song?",
     isNumInput: false,
     Answers: ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"],
-    Results: [0, 0, 0, 0, 0, 0, 0]
+    Results: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
   },
   {
     Question: "Happiness of this song on a scale from 0-10?",
     isNumInput: true,
     Answers: ["Quality"],
-    Results: [0],
+    Results: [0.5],
   },
   {
     Question: "What food(s) would a person listening to this song like to have for dinner?",
     isNumInput: false,
     Answers: ["Meat", "Seafood", "Veggies", "Nothing"],
-    Results: [0, 0, 0, 0],
+    Results: [0.5, 0.5, 0.5, 0.5],
   },
   {
     Question: "What animal(s) best describes the mood of the song?",
     isNumInput: false,
     Answers: ["Elephant", "Fish", "Turtle", "Fox", "Cow", "Dog", "Cat"],
-    Results: [0, 0, 0, 0, 0, 0, 0],
+    Results: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
   },
   {
     Question: "What disney movie(s) best describes this song?",
     isNumInput: false,
     Answers: ["Star Wars", "Frozen", "Moana", "Hercules", "Raya", "Aladdin"],
-    Results: [0, 0, 0, 0, 0, 0],
+    Results: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
   },
   {
     Question: "What would the quality of sleep be for a person listening to this song on a scale from 0-10?",
     isNumInput: true,
     Answers: ["Sleep"],
-    Results: [0],
+    Results: [0.5],
   },
   {
     Question: "Would a person listening to this song have a fun today?",
     isNumInput: false,
     Answers: ["Yes", "No"],
-    Results: [0, 0],
+    Results: [0.5, 0.5],
   },
   {
     Question: "Would a person listening to this song be productive?",
     isNumInput: false,
     Answers: ["Yes", "No"],
-    Results: [0, 0],
+    Results: [0.5, 0.5],
   },
   {
     Question: "Would a person who enjoys rollercoasters like this song?",
     isNumInput: false,
     Answers: ["Yes", "No"],
-    Results: [0, 0],
+    Results: [0.5, 0.5],
   },
   {
     Question: "What Myers-Briggs Type Indicator(s) would be most likely to listen to this song? (https://www.16personalities.com/personality-types)",
     isNumInput: false,
     Answers: ["Analysts", "Diplomats", "Sentinels", "Explorers"],
-    Results: [0, 0, 0, 0],
+    Results: [0.5, 0.5, 0.5, 0.5],
   },
   {
     Question: "What Astrology/zodiac sign(s) would be most likely to listen to this song? (http://nuclear.ucdavis.edu/~rpicha/personal/astrology/)",
     isNumInput: false,
     Answers: ["Aries", "Taurus", "Gemini", "Leo", "Cancer", "Libra", "Virgo", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
-    Results: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    Results: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
   },
 ]
 

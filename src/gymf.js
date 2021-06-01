@@ -143,6 +143,16 @@ export default function Gymf() {
   const [prediction1, setPrediction1] = useState("")
   const [prediction2, setPrediction2] = useState("")
   const [prediction3, setPrediction3] = useState("")
+
+
+  var arr = [];
+  while(arr.length < 7){
+      var r = Math.floor(Math.random() * gymf_questions.length - 2) + 1;
+      if(arr.indexOf(r) === -1) arr.push(r);
+  }
+
+  const [skips, setSkips] = useState(arr)
+  console.log(skips)
   
 
   //limit=10&market=ES&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry
@@ -237,7 +247,12 @@ export default function Gymf() {
     } else if (d == 1 && qindx == 0) {
       return
     } else if(qindx < gymf_questions.length - 1) {
-      setQIndx(qindx + 1)
+
+      var increaseby = 1
+      while(skips.includes(qindx + increaseby)) {
+        increaseby += 1
+      }
+      setQIndx(qindx + increaseby)
     }
   }
 

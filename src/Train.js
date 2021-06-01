@@ -207,6 +207,15 @@ export default function Train() {
   const [qFeatures, setQFeatures] = useState(null) //Has song data been sent to database yet?
   const [randomTrack, setRandomTrack] = useState(Math.floor(Math.random() * tracks.length)) //random track setRandomTrack should not be called
 
+  var arr = [];
+  while(arr.length < 7){
+      var r = Math.floor(Math.random() * training_questions.length - 2) + 1;
+      if(arr.indexOf(r) === -1) arr.push(r);
+  }
+
+  const [skips, setSkips] = useState(arr)
+  console.log(skips)
+
   // dec page if d = 1 and inc page if d = 0 and d=2 console.logs the answers
   const setPage = (d) => {
     if(d == 2) {
@@ -221,7 +230,12 @@ export default function Train() {
     } else if (d == 1 && qindx == 0) {
       return
     } else if(qindx < training_questions.length - 1) {
-      setQIndx(qindx + 1)
+
+      var increaseby = 1
+      while(skips.includes(qindx + increaseby)) {
+        increaseby += 1
+      }
+      setQIndx(qindx + increaseby)
     }
   }
 
