@@ -155,7 +155,6 @@ toSend = {
       spotifySearch(response.data, 2)
       spotifySearch(response.data, 3)
     });
-
 }
 
 export default function Gymf() {
@@ -175,7 +174,14 @@ export default function Gymf() {
       if(arr.indexOf(r) === -1) arr.push(r);
   }
 
+  var barr = [];
+  while(barr.length < genres["genres"].length - 10){
+      var r = Math.floor(Math.random() * genres["genres"].length - 2) + 1;
+      if(barr.indexOf(r) === -1) barr.push(r);
+  }
+
   const [skips, setSkips] = useState(arr)
+  const [genreSkips, setGenreSkips] = useState(barr)
   
 
   //limit=10&market=ES&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry
@@ -410,7 +416,7 @@ export default function Gymf() {
 
   if(qindx === -1) {
     return (
-      <div>
+      <div style={{paddingBottom: "10px"}}>
         <div style={{textAlign: 'center', fontSize: '40px', color:'#F0F4EF'}}>
           <h1>GYMF</h1>
           What 5 Genres might you be in the mood for? (Leave empty if you want to randomize!)
@@ -419,15 +425,16 @@ export default function Gymf() {
 
         <br/>
 
-        { genres['genres'].map((v) => {
+        { genres['genres'].map((v, i) => {
+          if(genreSkips.includes(i)) {
+            return (<></>)
+          }
           return(
             <div style={{fontSize: '30px', paddingLeft: '10px'}}> 
               <input key={v} id={v} type="checkbox" onClick={genreClick}></input>{v}
             </div>
             )
         })}
-
-        
         
       </div>
     )
