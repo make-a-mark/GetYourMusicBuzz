@@ -7,6 +7,10 @@ import 'firebase/firestore';
 import { data } from "jquery";
 import axios from "axios";
 
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import IconButton from '@material-ui/core/IconButton'
+import PublishIcon from '@material-ui/icons/Publish';
+
 // create a web app in fireabse 
 // then get your app config object from firebase console -> settings
 const firebaseConfig = {
@@ -46,17 +50,25 @@ export async function send_data()
   axios.post('http://70.95.147.51:5000/predict', train_data[0])
     .then(response => console.log(response));
     */
+
+  var link2 = "https://gymf.herokuapp.com/reset"
+  await axios.get(link2);
+
   for(var i = 0; i < train_data.length; i++)
   {
     var link = "https://gymf.herokuapp.com/receive"
-    axios.post(link, train_data[i]);
+    await axios.post(link, train_data[i]);
   }
-  /*
-      // Simple POST request with a JSON body using axios
-      const article = { title: 'Training Data' };
-      axios.post('/receive', article)
-          .then(response => this.setState({ articleId: response.data.id }));
-  */
+
+  var link3 = "https://gymf.herokuapp.com/train"
+  await axios.get(link3);
+
+  // *
+  //     // Simple POST request with a JSON body using axios
+  //     const article = { title: 'Training Data' };
+  //     axios.post('/receive', article)
+  //         .then(response => this.setState({ articleId: response.data.id }));
+  // */
 }
 
 
@@ -72,14 +84,21 @@ function PageClickers(props) {
       <div>
         {/*<button onClick={() => props.setPage(1)}> left </button>*/}
         {/* <input type="text" onChange={(e)=>{setUsername(e.target.value)}}></input>  */}
-        <button onClick={() => props.setPage(2)}> Submit </button>
+        <IconButton style={{color: 'white'}}
+          onClick={() => props.setPage(2)}>
+          <PublishIcon style={{width: '100px', height: '100px'}}/>
+        </IconButton>
       </div>
     )
   } else {
     return (
       <div>
         {/*<button onClick={() => props.setPage(1)}> left </button>*/}
-        <button onClick={() => props.setPage(0)}> right </button>
+
+        <IconButton style={{color: 'white'}}
+          onClick={() => props.setPage(0)}>
+          <ChevronRightIcon style={{width: '100px', height: '100px'}}/>
+        </IconButton>
       </div>
     )
   }
@@ -164,6 +183,7 @@ export function FeatureAdd( colors,
   })
   .then(() => {
     console.log("Document successfully created!");
+    send_data(); 
     // window.location = "/"
   })
 }
@@ -300,12 +320,12 @@ export default function Train() {
 
   if(training_questions[qindx].isNumInput) {
     return(
-      <div>
+      <div style={{textAlign: 'center'}}>
         <Player uris={tracks[randomTrack]}/>
-        <div>{training_questions[qindx].Question}</div>
+        <div style={{fontSize: '40px'}}>{training_questions[qindx].Question}</div>
           {training_questions[qindx].Answers.map( (ans) => {
             return (
-            <div key={ans + qindx}> 
+            <div style={{textAlign: 'center'}} key={ans + qindx}> 
               <input type="number" onChange={checkNum}></input> 
               <br/>
             </div>)
@@ -318,19 +338,26 @@ export default function Train() {
   } else {
     return(
       <div>
-        <Player uris={tracks[randomTrack]}/>
-        <div>{training_questions[qindx].Question}</div>
-          {training_questions[qindx].Answers.map( (ans, indx) => {
-            return (
-            <div key={ans + qindx}> 
-              <input onChange={(e) => checkClick(e, indx)} type="checkbox"></input> 
-              {ans}
-              <br/>
-            </div>)
-          })}
+        <div style={{width:'100%'}}>
+          <Player uris={tracks[randomTrack]}/>
+        </div>
+        <div style={{textAlign: 'center'}}>
+          <div style={{fontSize: '40px', color:'#F0F4EF'}}>{training_questions[qindx].Question}</div>
+            {training_questions[qindx].Answers.map( (ans, indx) => {
+              return (
+                <div style={{textAlign: 'center', color:'#F0F4EF', paddingLeft: '10px', fontSize:'30px'}}>
+                  <div style={{textAlign: 'start'}}key={ans + qindx}> 
+                    <input onChange={(e) => checkClick(e, indx)} type="checkbox"></input> 
+                    {ans}
+                    <br/>
+                  </div>
+                </div>)
+              
+            })}
 
-        <br/>
-        <PageClickers setPage={setPage} currentPage={qindx} maxPage={ans.length} />
+          <br/>
+          <PageClickers setPage={setPage} currentPage={qindx} maxPage={ans.length} />
+        </div>
       </div>
     )
   }

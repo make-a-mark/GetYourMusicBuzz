@@ -5,21 +5,42 @@ import Player from "./Player"
 import {Player1} from "./Player"
 import axios from "axios"
 
+
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import IconButton from '@material-ui/core/IconButton'
+import PublishIcon from '@material-ui/icons/Publish';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import LooksOneIcon from '@material-ui/icons/LooksOne';
+import LooksTwoIcon from '@material-ui/icons/LooksTwo';
+import Looks3Icon from '@material-ui/icons/Looks3';
+import HomeIcon from '@material-ui/icons/Home';
+import ReplayIcon from '@material-ui/icons/Replay';
+
 import {FeatureAdd} from "./Train";
 
 function PageClickers(props) {
+
+  const [username, setUsername] = useState("")
   if(props.currentPage === props.maxPage - 1) {
     return (
       <div>
         {/*<button onClick={() => props.setPage(1)}> left </button>*/}
-        <button onClick={() => props.setPage(2)}> Submit </button>
+        {/* <input type="text" onChange={(e)=>{setUsername(e.target.value)}}></input>  */}
+        <IconButton style={{color: 'white'}}
+          onClick={() => props.setPage(2)}>
+          <PublishIcon style={{width: '100px', height: '100px'}}/>
+        </IconButton>
       </div>
     )
   } else {
     return (
       <div>
         {/*<button onClick={() => props.setPage(1)}> left </button>*/}
-        <button onClick={() => props.setPage(0)}> right </button>
+
+        <IconButton style={{color: 'white'}}
+          onClick={() => props.setPage(0)}>
+          <ChevronRightIcon style={{width: '100px', height: '100px'}}/>
+        </IconButton>
       </div>
     )
   }
@@ -27,6 +48,7 @@ function PageClickers(props) {
 
 var toSend;
 var sendAnswers;
+var prediction_labels;
 
 function set_rank_labels(data) {
   console.log(data)
@@ -126,6 +148,7 @@ toSend = {
 
   axios.post('https://gymf.herokuapp.com/predict', toSend)
     .then(response => {
+      prediction_labels = response.data;
       console.log(response.data)
       spotifySearch(response.data, 0)
       spotifySearch(response.data, 1)
@@ -136,6 +159,7 @@ toSend = {
 }
 
 export default function Gymf() {
+
   const [qindx, setQIndx] = useState(-1)
   const [chosenGenres, setChosenGenres] = useState([])
   const [ans, setAns] = useState(gymf_questions) //stores copy of questions but answers fill up in here
@@ -152,7 +176,6 @@ export default function Gymf() {
   }
 
   const [skips, setSkips] = useState(arr)
-  console.log(skips)
   
 
   //limit=10&market=ES&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry
@@ -292,18 +315,22 @@ export default function Gymf() {
   }
 
   if(prediction && prediction1 && prediction2 && prediction3) {
-    // console.log(toSend);
-    console.log(prediction);
-    console.log(prediction1);
-    console.log(prediction2);
-    console.log(prediction3);
+     console.log(prediction);
+     var acousticness_opacity = String(prediction_labels["label_acousticness"] + 0.05)
+     var danceability_opacity = String(prediction_labels["label_danceability"] + 0.05)
+     var energy_opacity = String(prediction_labels["label_energy"] + 0.05)
+     var instrumentalness_opacity = String(prediction_labels["label_instrumentalness"] + 0.05)
+     var loudness_opacity = String(Math.abs(prediction_labels["label_loudness"] / 60) + 0.05)
+     var mode_opacity = String(prediction_labels["label_mode"] + 0.05)
+     var speechiness_opacity = String(prediction_labels["label_speechiness"] + 0.05)
+     var mode_opacity = String(prediction_labels["label_mode"] + 0.05)
+     var valence_opacity = String(prediction_labels["label_valence"] + 0.05)
+
     return(
-      <div>
-        Your prediction:
+      <div style={{textAlign: 'center', fontSize: '40px'}}>
         <Player1 id='a' uris={[prediction, prediction1, prediction2, prediction3]} /> 
 
-        If you don't like it, take a listen to the other 3 songs <br />
-        and let us know which you like better to improve your prediction in the future!
+        Tell us which you like!
         {/* <Player1 id='b' uris={prediction} /> */}
 
         <br />
@@ -322,12 +349,61 @@ export default function Gymf() {
                 tracks[randomTrack],
                 data
                 ); */}
-        <button onClick={() => send_rank(prediction) }>Original</button>
-        <button onClick={() => send_rank(prediction1)}>Song 1</button>
-        <button onClick={() => send_rank(prediction2)}>Song 2</button>
-        <button onClick={() => send_rank(prediction3)}>Song 3</button>
+        <IconButton style={{color: 'white'}}
+          onClick={() => send_rank(prediction) }>
+          <ThumbUpIcon style={{width: '100px', height: '100px'}}/>
+        </IconButton>
+        <IconButton style={{color: 'white'}}
+          onClick={() => send_rank(prediction1) }>
+          <LooksOneIcon style={{width: '100px', height: '100px'}}/>
+        </IconButton>
+        <IconButton style={{color: 'white'}}
+          onClick={() => send_rank(prediction2) }>
+          <LooksTwoIcon style={{width: '100px', height: '100px'}}/>
+        </IconButton>
+        <IconButton style={{color: 'white'}}
+          onClick={() => send_rank(prediction3) }>
+          <Looks3Icon style={{width: '100px', height: '100px'}}/>
+        </IconButton>
         <br />
-        <button onClick={() => window.location = '/'}>Home</button>
+        <IconButton style={{color: 'white'}}
+          onClick={() => window.location = '/'}>
+          <HomeIcon style={{width: '50px', height: '50px'}}/>
+        </IconButton>
+        <IconButton style={{color: 'white'}}
+          onClick={() => window.location = '/gymf'}>
+          <ReplayIcon style={{width: '50px', height: '50px'}}/>
+        </IconButton>
+        
+        <br />
+        {/* calc(50% - 180px); */}
+        <div style={{color:"#E6AACE"}}>
+          <div style={{opacity: acousticness_opacity }}>                
+            Acousticness: {String(prediction_labels["label_acousticness"])}
+          </div>
+          <div style={{opacity: danceability_opacity }}>                
+            Danceability: {String(prediction_labels["label_danceability"])}
+          </div>
+          <div style={{opacity: energy_opacity }}>                
+            Energy: {String(prediction_labels["label_energy"])}
+          </div>
+          <div style={{opacity: instrumentalness_opacity }}>                
+            Instrumentalness: {String(prediction_labels["label_instrumentalness"])}
+          </div>
+          <div style={{opacity: loudness_opacity }}>                
+            Loudness: {String(prediction_labels["label_loudness"])}
+          </div>
+          <div style={{opacity: mode_opacity }}>                
+            Mode: {String(prediction_labels["label_mode"])}
+          </div>
+          <div style={{opacity: speechiness_opacity }}>                
+            Speechiness: {String(prediction_labels["label_speechiness"])}
+          </div>
+          <div style={{opacity: valence_opacity }}>                
+            Valence: {String(prediction_labels["label_valence"])}
+          </div>
+        </div>
+        {/* <button onClick={() => window.location = '/'}>Home</button> */}
       </div>
     )
   }
@@ -335,15 +411,17 @@ export default function Gymf() {
   if(qindx === -1) {
     return (
       <div>
-        <h1>GYMF</h1>
-        What 5 Genres might you be in the mood for? (Leave empty if you want to randomize!)
+        <div style={{textAlign: 'center', fontSize: '40px', color:'#F0F4EF'}}>
+          <h1>GYMF</h1>
+          What 5 Genres might you be in the mood for? (Leave empty if you want to randomize!)
+          <PageClickers setPage={setPage} currentPage={qindx} maxPage={ans.length} />
+        </div>
 
         <br/>
-        <PageClickers setPage={setPage} currentPage={qindx} maxPage={ans.length} />
 
         { genres['genres'].map((v) => {
           return(
-            <div> 
+            <div style={{fontSize: '30px', paddingLeft: '10px'}}> 
               <input key={v} id={v} type="checkbox" onClick={genreClick}></input>{v}
             </div>
             )
@@ -357,12 +435,12 @@ export default function Gymf() {
 
   if(gymf_questions[qindx].isNumInput) {
     return(
-      <div>
+      <div style={{textAlign: 'center'}}>
         <h1>GYMF</h1>
-        <div>{gymf_questions[qindx].Question}</div>
+        <div style={{fontSize: '40px', color: '#F0F4EF'}}>{gymf_questions[qindx].Question}</div>
           {gymf_questions[qindx].Answers.map( (ans) => {
             return (
-            <div key={ans + qindx}> 
+            <div style={{textAlign: 'center'}} key={ans + qindx}> 
               <input type="number" onChange={checkNum}></input> 
               <br/>
             </div>)
@@ -371,15 +449,15 @@ export default function Gymf() {
         <br/>
         <PageClickers setPage={setPage} currentPage={qindx} maxPage={ans.length} />
       </div>
-    )
+      )
   } else {
     return(
-      <div>
+      <div style={{textAlign: 'center'}}>
         <h1>GYMF</h1>
-        <div>{gymf_questions[qindx].Question}</div>
+        <div style={{fontSize: '40px', color:'#F0F4EF'}}>{gymf_questions[qindx].Question}</div>
           {gymf_questions[qindx].Answers.map( (ans, indx) => {
             return (
-            <div key={ans + qindx}> 
+            <div style={{textAlign: 'left' , color:'#F0F4EF', paddingLeft: '10px', fontSize:'30px'}} key={ans + qindx}> 
               <input onChange={(e) => checkClick(e, indx)} type="checkbox"></input> 
               {ans}
               <br/>

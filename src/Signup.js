@@ -1,4 +1,8 @@
 import React, {Component } from "react";
+import Button from '@material-ui/core/Button';
+import { IconButton } from '@material-ui/core';
+import TimerIcon from '@material-ui/icons/Timer';
+import WifiTetheringIcon from '@material-ui/icons/WifiTethering';
 
 const my_client_id = "025272b187b744a88a3514d168b0e71d";
 const local_redirect_uri = "http://localhost:3000/signup";
@@ -27,6 +31,7 @@ function link() {
 export default function signup(props) {
   const redirect = () => {
     window.location = link();
+    alert("You are now signed in with Spotify!")
   };
 
   const url = window.location.href;
@@ -51,7 +56,13 @@ export default function signup(props) {
   } else {
     return (
       <div>
-        <button onClick={redirect}> Connect to Spotify</button>
+         <IconButton aria-label="Spotify Connect">
+                        <WifiTetheringIcon 
+                            style={{color: '#BFCC94', width: '35px', height: '35px'}}    
+                            onClick={redirect}
+                        />
+                    </IconButton>
+        {/* <Button style={{backgroundColor: '#BFCC94', color: "white"}} variant="contained" onClick={redirect}>Connect to Spotify</Button> */}
       </div>
     )
   }

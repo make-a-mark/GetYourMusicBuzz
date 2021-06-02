@@ -2,6 +2,12 @@ import logo from "./logo.svg";
 import React, {useState } from "react";
 import "./App.css";
 import "./CurrentUser"
+import Button from '@material-ui/core/Button';
+import { IconButton } from '@material-ui/core';
+import TimerIcon from '@material-ui/icons/Timer';
+import WifiTetheringIcon from '@material-ui/icons/WifiTethering';
+
+import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
 
 import {
   BrowserRouter as Router,
@@ -18,18 +24,22 @@ import Player from "./Player"
 import Gymf from "./gymf"
 import CurrentUser from "./CurrentUser";
 
-
+ 
 function WelcomeSite() {
 
   return (
-    <div>
-      <h1>
-        I am GetYourMusicBuzz!
-      </h1>
-      <div>
-        <button onClick={() => window.location = "/train"}> Train </button>
-        <button onClick={() => window.location = "/gymf"}> GYMF </button>
-        <button onClick={send_data}> SendData </button>
+    <div style={{textAlign: 'center', paddingTop: '30px'}}>
+      <div style={{textAlign: 'center'}}>
+        {/* <button onClick={() => window.location = "/train"}> Train </button> */}
+        <IconButton style={{color: '#F0F4EF'}} aria-label="Train your personalized model!" onClick={() => window.location = "/train"}>
+          <TimerIcon style={{width:200, height:200}} />
+        </IconButton>
+
+        {/* <button onClick={() => window.location = "/gymf"}> GYMF </button> */}
+        <IconButton style={{color: '#E6AACE'}} aria-label="Find a Song" onClick={() => window.location = "/gymf"}>
+          <LibraryMusicIcon style={{width:200, height:200}} />
+        </IconButton>
+        {/* <button onClick={send_data}> SendData </button> */}
       </div>
     </div>
   )
@@ -38,8 +48,19 @@ function WelcomeSite() {
 function App() {
   return (
     <div>
-      <Signup />
-      <CurrentUser />
+      <div style={{display: 'inline-block', width: '100%'}}>
+        <div style={{float: 'left'}}>
+          <Signup />
+        </div>
+        <div style={{float: 'right', right: '0px'}}> 
+          <CurrentUser />
+        </div>
+      </div>
+
+      
+      {/* // <div style={{textAlign: 'right', display: 'inline'}}>
+      //   <CurrentUser style={{textAlign: 'right'}} />
+      // </div> */}
       <Router>
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
