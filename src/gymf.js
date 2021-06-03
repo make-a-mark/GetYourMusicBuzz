@@ -15,6 +15,7 @@ import LooksTwoIcon from '@material-ui/icons/LooksTwo';
 import Looks3Icon from '@material-ui/icons/Looks3';
 import HomeIcon from '@material-ui/icons/Home';
 import ReplayIcon from '@material-ui/icons/Replay';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 import {FeatureAdd} from "./Train";
 
@@ -166,6 +167,7 @@ export default function Gymf() {
   const [prediction1, setPrediction1] = useState("")
   const [prediction2, setPrediction2] = useState("")
   const [prediction3, setPrediction3] = useState("")
+  const [showPredictions, setShowPredictions] = useState(false)
 
 
   var arr = [];
@@ -329,7 +331,6 @@ export default function Gymf() {
      var loudness_opacity = String(Math.abs(prediction_labels["label_loudness"] / 60) + 0.05)
      var mode_opacity = String(prediction_labels["label_mode"] + 0.05)
      var speechiness_opacity = String(prediction_labels["label_speechiness"] + 0.05)
-     var mode_opacity = String(prediction_labels["label_mode"] + 0.05)
      var valence_opacity = String(prediction_labels["label_valence"] + 0.05)
 
     return(
@@ -380,36 +381,42 @@ export default function Gymf() {
           onClick={() => window.location = '/gymf'}>
           <ReplayIcon style={{width: '50px', height: '50px'}}/>
         </IconButton>
-        
+        <IconButton style={{color: 'white'}}
+          onClick={() => setShowPredictions(!showPredictions)}>
+          <VisibilityIcon style={{width: '50px', height: '50px'}}/>
+        </IconButton>
         <br />
-        {/* calc(50% - 180px); */}
-        <div style={{color:"#E6AACE"}}>
-          <div style={{opacity: acousticness_opacity }}>                
-            Acousticness: {String(prediction_labels["label_acousticness"])}
-          </div>
-          <div style={{opacity: danceability_opacity }}>                
-            Danceability: {String(prediction_labels["label_danceability"])}
-          </div>
-          <div style={{opacity: energy_opacity }}>                
-            Energy: {String(prediction_labels["label_energy"])}
-          </div>
-          <div style={{opacity: instrumentalness_opacity }}>                
-            Instrumentalness: {String(prediction_labels["label_instrumentalness"])}
-          </div>
-          <div style={{opacity: loudness_opacity }}>                
-            Loudness: {String(prediction_labels["label_loudness"])}
-          </div>
-          <div style={{opacity: mode_opacity }}>                
-            Mode: {String(prediction_labels["label_mode"])}
-          </div>
-          <div style={{opacity: speechiness_opacity }}>                
-            Speechiness: {String(prediction_labels["label_speechiness"])}
-          </div>
-          <div style={{opacity: valence_opacity }}>                
-            Valence: {String(prediction_labels["label_valence"])}
+
+        <div style={{display: showPredictions ? 'block' : 'none'}}>
+          <div style={{color:"#E6AACE"}}>
+            <div style={{opacity: acousticness_opacity  }}>                
+              Acousticness: {String(prediction_labels["label_acousticness"])}
+            </div>
+            <div style={{opacity: danceability_opacity  }}>                
+              Danceability: {String(prediction_labels["label_danceability"])}
+            </div>
+            <div style={{opacity: energy_opacity  }}>                
+              Energy: {String(prediction_labels["label_energy"])}
+            </div>
+            <div style={{opacity: instrumentalness_opacity }}>                
+              Instrumentalness: {String(prediction_labels["label_instrumentalness"])}
+            </div>
+            <div style={{opacity: loudness_opacity  }}>                
+              Loudness: {String(prediction_labels["label_loudness"])}
+            </div>
+            <div style={{opacity: mode_opacity }}>                
+              Mode: {String(prediction_labels["label_mode"])}
+            </div>
+            <div style={{opacity: speechiness_opacity }}>                
+              Speechiness: {String(prediction_labels["label_speechiness"])}
+            </div>
+            <div style={{opacity: valence_opacity}}>                
+              Valence: {String(prediction_labels["label_valence"])}
+            </div>
           </div>
         </div>
-        {/* <button onClick={() => window.location = '/'}>Home</button> */}
+
+
       </div>
     )
   }

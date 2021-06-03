@@ -240,8 +240,8 @@ export default function Train() {
   const setPage = (d) => {
     if(d == 2) {
       getTrackFeatures(randomTrack, handleTrackValues)
-
-      //window.location = '/';
+      alert("Training Instance Recorded!");
+      window.location = '/';
 
     }
 
