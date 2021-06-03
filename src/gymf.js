@@ -81,6 +81,7 @@ function getTrackFeatures(trackid, callback) {
 function send_rank(prediction_track) {
   sendAnswers['track'] = prediction_track
   getTrackFeatures(prediction_track, set_rank_labels)
+  alert("Ranking recorded! Press the home icon to go to our home screen or the replay icon to get a new recommendation! Thanks for using GetYourMusicBuzz!")
 }
 
 function predictFeatures( 
